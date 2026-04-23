@@ -1,27 +1,31 @@
 import "./App.css";
-import Greeting from "./Greeting";
-import Card from "./Card";
+import ProductCard from "./components/ProductCard";
+import products from "./data/product";
 
 function App() {
-	const tips = [
-		"Take one small action before aiming for perfect results.",
-		"Focus on progress, not pressure.",
-		"Pause, breathe, and restart with clarity when struck",
-		"Protect your energy by finishing one task at a time.",
-	];
+	const availableCount = products.filter((p) => p.inStock).length;
 	return (
-		<>
-			<h1>HelloWorld</h1>
-			<Greeting name="John Doe" />
-
-			<Card title="Motivational Tips" className="tips-block">
-				<ul className="tip-list">
-					{tips.map((tip, index) => (
-						<li key={index}>{tip}</li>
-					))}
-				</ul>
-			</Card>
-		</>
+		<div className="app">
+			<header className="app-header">
+				<h1>Tech Shop</h1>
+				<p>
+					{products.length} products | {availableCount} available
+				</p>
+			</header>
+			<div className="gallery-grid">
+				{products.map((product) => (
+					<ProductCard
+						name={product.name}
+						price={product.price}
+						rating={product.rating}
+						reviews={product.reviews}
+						inStock={product.inStock}
+						category={product.category}
+						image={product.image}
+					/>
+				))}
+			</div>
+		</div>
 	);
 }
 
