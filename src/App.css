@@ -145,6 +145,31 @@
   border-top: 1px solid var(--border);
 }
 
+.product-description {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.original-price {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  font-style: italic;
+  margin-bottom: -0.5rem;
+}
+
 .price {
   font-family: var(--font-heading);
   font-size: 2.25rem;

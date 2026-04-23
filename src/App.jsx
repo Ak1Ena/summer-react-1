@@ -23,6 +23,8 @@ function App() {
 						inStock={product.inStock}
 						category={product.category}
 						image={product.image}
+						discount={product.discount}
+						description={product.description}
 					/>
 				))}
 			</div>
