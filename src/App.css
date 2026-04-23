@@ -1,0 +1,207 @@
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12rem 2rem;
+  animation: revealUp 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.app-header {
+  margin-bottom: 12rem;
+  text-align: center;
+  position: relative;
+}
+
+.app-header::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--text-primary);
+  margin: 3rem auto 0;
+}
+
+.app-header h1 {
+  font-size: clamp(5rem, 15vw, 10rem);
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.app-header p {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8rem 4rem;
+}
+
+/* Staggered Entry Animation for Cards */
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  animation: revealUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.2s; }
+.product-card:nth-child(2) { animation-delay: 0.3s; }
+.product-card:nth-child(3) { animation-delay: 0.4s; }
+.product-card:nth-child(4) { animation-delay: 0.5s; }
+.product-card:nth-child(5) { animation-delay: 0.6s; }
+.product-card:nth-child(6) { animation-delay: 0.7s; }
+
+.product-img {
+  width: 100%;
+  aspect-ratio: 1/1.2;
+  object-fit: cover;
+  margin-bottom: 2.5rem;
+  transition: var(--transition-luxe);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  background: white;
+}
+
+.product-card:hover .product-img {
+  transform: translateY(-15px);
+  box-shadow: var(--shadow-luxe);
+  border-color: var(--text-primary);
+}
+
+.badge {
+  position: absolute;
+  top: 2rem;
+  right: -0.5rem;
+  z-index: 10;
+  padding: 0.6rem 1.2rem;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.badge-red {
+  background: #dc2626;
+}
+
+.category {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.product-card h3 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.rating > span:first-child {
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  color: var(--text-primary);
+}
+
+.review-count {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.price {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.add-btn {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-bottom: 4px;
+  position: relative;
+}
+
+.add-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.add-btn:hover:not(:disabled)::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.add-btn:disabled {
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.unavailable {
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 6rem 1.5rem;
+  }
+  
+  .app-header h1 {
+    font-size: 4rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 6rem;
+  }
+}

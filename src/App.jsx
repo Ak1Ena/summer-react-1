@@ -15,6 +15,7 @@ function App() {
 			<div className="gallery-grid">
 				{products.map((product) => (
 					<ProductCard
+						key={product.id}
 						name={product.name}
 						price={product.price}
 						rating={product.rating}
