@@ -1,88 +1,181 @@
-:root {
-  --bg: #ffffff;
-  --text: #000000;
-  --muted: #999999;
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  margin: 0;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  line-height: 1.4;
-}
-
-#root {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-}
-
-h1 {
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+.app-header {
+  background: #4F46E5;
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
   text-align: center;
-  margin: 0;
+  margin-bottom: 25px;
 }
 
-header {
+.controls {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #4F46E5;
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-header h1 {
-  text-align: left;
-  font-size: 1.5rem;
-  text-transform: none;
-  letter-spacing: normal;
-  font-weight: 600;
+.sort-container select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
 }
 
-header p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.card {
-  margin-top: 20px;
-}
-
-.card-title {
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+.region-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.tips-block h2 {
-  display: none;
-}
-
-.tip-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.tip-list li {
-  font-size: 1.1rem;
+.region-filters button {
+  padding: 8px 16px;
+  border: 1px solid #4F46E5;
+  background: white;
+  color: #4F46E5;
+  border-radius: 20px;
   cursor: pointer;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  transition: color 0.2s;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.tip-list li:hover {
-  color: var(--muted);
+.region-filters button:hover,
+.region-filters button.active {
+  background: #4F46E5;
+  color: white;
+}
+
+.badge {
+  background: rgba(79, 70, 229, 0.1);
+  color: #4F46E5;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.region-filters button.active .badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.results-count {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.country-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  transition: transform .2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.country-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-image-container {
+  position: relative;
+}
+
+.country-flag {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.favourite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.favourite-btn:hover {
+  transform: scale(1.1);
+  background: white;
+}
+
+.country-info {
+  padding: 15px;
+}
+
+.country-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.country-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.error-message {
+  text-align: center;
+  padding: 50px;
+  color: #dc2626;
 }
