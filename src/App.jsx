@@ -24,8 +24,9 @@ function App() {
   }, [tasks]);
 
   function handleAddTask(text) {
+     const nextId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
     const newTask = {
-      id: Date.now(),
+      id: nextId,
       text: text,
       completed: false
     };
