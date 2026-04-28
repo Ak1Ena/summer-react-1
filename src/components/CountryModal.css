@@ -28,6 +28,35 @@
   box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);
   border: 1px solid var(--border-light);
   animation: modalSlide 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+/* Custom Rich Scrollbar */
+.modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 20px;
+  border: 3px solid var(--bg-card);
+  transition: all 0.3s;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary);
+}
+
+/* Firefox Support */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
 }
 
 @keyframes modalSlide {

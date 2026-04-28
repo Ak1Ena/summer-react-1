@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
 import './CountryModal.css';
 
 function CountryModal({ country, onClose }) {
+  useEffect(() => {
+    if (country) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [country]);
+
   if (!country) return null;
 
   return (
