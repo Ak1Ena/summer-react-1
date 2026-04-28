@@ -1,32 +1,38 @@
 :root {
-  /* Ultra-Rich Color Palette - Light */
-  --bg-app: #f8fafc;
+  /* System Colors - Light Mode */
+  --brand-primary: #6366f1;
+  --brand-secondary: #4f46e5;
+  --bg-main: #f8fafc;
   --bg-card: #ffffff;
-  --accent: #6366f1;
+  --bg-input: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-light: #e2e8f0;
   --accent-soft: rgba(99, 102, 241, 0.1);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
-  --glass: rgba(255, 255, 255, 0.8);
-  --radius: 20px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --glass: rgba(255, 255, 255, 0.7);
 }
 
 body.dark {
-  /* Ultra-Rich Color Palette - Dark */
-  --bg-app: #020617;
+  /* System Colors - Dark Mode */
+  --bg-main: #020617;
   --bg-card: #0f172a;
-  --accent: #818cf8;
+  --bg-input: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-light: #1e293b;
   --accent-soft: rgba(129, 140, 248, 0.15);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border: #1e293b;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.3);
-  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.4);
-  --glass: rgba(15, 23, 42, 0.8);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --glass: rgba(15, 23, 42, 0.7);
 }
 
 * {
@@ -34,76 +40,82 @@ body.dark {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: var(--bg-app);
-  color: var(--text-main);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  line-height: 1.5;
+  overflow-x: hidden;
 }
 
 .app {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 60px 24px;
 }
 
-/* Header - Modern Minimalist */
+/* Header Section */
 .app-header {
-  margin-bottom: 48px;
+  margin-bottom: 60px;
+}
+
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .header-content h1 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 800;
-  letter-spacing: -0.04em;
-  background: linear-gradient(to right, var(--accent), #ec4899);
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, var(--brand-primary), #ec4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.05));
 }
 
 .theme-toggle {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-  padding: 12px 20px;
-  border-radius: 14px;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  border-radius: 16px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .theme-toggle:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-md);
-  border-color: var(--accent);
+  border-color: var(--brand-primary);
 }
 
-/* Controls - Glassmorphism */
+/* Control Panel */
 .glass-panel {
   background: var(--glass);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
   padding: 32px;
-  border-radius: var(--radius);
-  margin-bottom: 40px;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  margin-bottom: 48px;
+  box-shadow: var(--shadow-lg);
 }
 
 .controls {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 24px;
+  gap: 32px;
   align-items: center;
 }
 
@@ -115,149 +127,161 @@ body {
 
 .search-container input {
   width: 100%;
-  padding: 16px 24px;
-  padding-right: 50px;
-  background: var(--bg-app);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  font-size: 1rem;
-  color: var(--text-main);
+  padding: 18px 28px;
+  padding-right: 60px;
+  background: var(--bg-input);
+  border: 2px solid transparent;
+  border-radius: 18px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
   transition: all 0.3s ease;
 }
 
 .search-container input:focus {
   outline: none;
-  border-color: var(--accent);
+  background: var(--bg-card);
+  border-color: var(--brand-primary);
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .search-container button {
   position: absolute;
-  right: 16px;
-  background: transparent;
+  right: 20px;
+  background: var(--brand-primary);
+  color: white;
   border: none;
-  color: var(--text-muted);
-  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.2s;
 }
 
 .search-container button:hover {
-  color: #ef4444;
+  transform: scale(1.1);
+  background: var(--brand-secondary);
 }
 
 .sort-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .sort-container label {
   font-weight: 700;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 0.9rem;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .sort-container select {
-  padding: 14px 20px;
-  background: var(--bg-app);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  color: var(--text-main);
-  font-weight: 600;
+  padding: 16px 24px;
+  background: var(--bg-input);
+  border: 2px solid transparent;
+  border-radius: 18px;
+  color: var(--text-primary);
+  font-weight: 700;
   cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='Length 19 9l-7 7-7-7'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 16px;
-  padding-right: 48px;
+  transition: all 0.2s;
 }
 
-/* Region Filters - Chic Pills */
+.sort-container select:hover {
+  border-color: var(--border-light);
+}
+
+/* Region Pills */
 .region-filters {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
   margin-bottom: 40px;
 }
 
 .region-filters button {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  padding: 10px 24px;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 12px 28px;
   border-radius: 100px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .region-filters button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .region-filters button.active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
   color: white;
-  box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 20px -8px rgba(99, 102, 241, 0.5);
 }
 
 .badge {
   background: var(--accent-soft);
-  color: var(--accent);
-  padding: 2px 8px;
+  color: var(--brand-primary);
+  padding: 2px 10px;
   border-radius: 8px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .region-filters button.active .badge {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   color: white;
 }
 
 .results-count {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 24px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
 }
 
-/* Country Grid */
+/* Country Grid System */
 .country-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
 }
 
-/* Individual Card Styling */
+/* Premium Card Design */
 .country-card {
   background: var(--bg-card);
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid var(--border-light);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: pointer;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .country-card:hover {
-  transform: translateY(-12px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent);
+  transform: translateY(-16px) scale(1.02);
+  box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15);
+  border-color: var(--brand-primary);
 }
 
 .card-image-container {
-  height: 200px;
+  height: 220px;
   position: relative;
   overflow: hidden;
 }
@@ -266,92 +290,97 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.8s ease;
 }
 
 .country-card:hover .country-flag {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .favourite-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.9);
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
 }
 
 .favourite-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(8deg);
   background: white;
 }
 
 .favourite-btn.active {
-  color: #ef4444;
+  color: #ff4757;
+  background: white;
   animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes heartPop {
   0% { transform: scale(1); }
-  50% { transform: scale(1.4); }
+  50% { transform: scale(1.5); }
   100% { transform: scale(1); }
 }
 
 .country-info {
-  padding: 24px;
+  padding: 32px;
+  flex: 1;
 }
 
 .country-info h3 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
 }
 
 .country-info p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
 }
 
 .country-info strong {
-  color: var(--text-main);
-  font-weight: 600;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
-/* Animations */
+/* Entrance Animations */
 .fade-in-up {
   opacity: 0;
   animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Overrides */
+/* Luxury Media Queries */
 @media (max-width: 1024px) {
-  .app { padding: 24px; }
-  .controls { grid-template-columns: 1fr; }
+  .app { padding: 40px 24px; }
+  .controls { grid-template-columns: 1fr; gap: 24px; }
   .country-grid { gap: 24px; }
+  .header-content h1 { font-size: 2rem; }
 }
 
 @media (max-width: 768px) {
-  .header-content h1 { font-size: 1.75rem; }
   .region-filters {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -359,10 +388,14 @@ body {
     scrollbar-width: none;
   }
   .region-filters::-webkit-scrollbar { display: none; }
+  .region-filters button { flex-shrink: 0; padding: 10px 20px; }
 }
 
 @media (max-width: 480px) {
-  .app { padding: 16px; }
-  .glass-panel { padding: 20px; }
+  .app { padding: 24px 16px; }
+  .glass-panel { padding: 24px; }
+  .header-content { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .theme-toggle { width: 100%; justify-content: center; }
   .country-grid { grid-template-columns: 1fr; }
+  .card-image-container { height: 180px; }
 }
