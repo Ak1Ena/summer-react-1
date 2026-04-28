@@ -27,15 +27,17 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
   return (
     <li className={`task-item${task.completed ? " completed" : ""}`}>
       <div className="task-content">
-        <label className="task-label">
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => onToggle(task.id)}
-          />
-          {!isEditing ? (
+        {!isEditing ? (
+          <label className="task-label">
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={() => onToggle(task.id)}
+            />
             <span>{task.text}</span>
-          ) : (
+          </label>
+        ) : (
+          <div className="edit-container">
             <input
               type="text"
               className="edit-input"
@@ -44,8 +46,8 @@ function TaskItem({ task, onToggle, onDelete, onEdit }) {
               onKeyDown={handleKeyDown}
               autoFocus
             />
-          )}
-        </label>
+          </div>
+        )}
       </div>
       <div className="task-actions">
         <button className="edit-btn" onClick={handleEdit}>
