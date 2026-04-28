@@ -127,3 +127,46 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
 }
+
+/* Modal Responsiveness */
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 20px;
+    width: 95%;
+    border-radius: 15px;
+  }
+  
+  .modal-body h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .official-name {
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .modal-details p {
+    font-size: 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .modal-details strong {
+    width: auto;
+    color: var(--primary-color);
+  }
+  
+  .modal-flag {
+    max-height: 200px;
+    margin-bottom: 15px;
+  }
+  
+  .btn-map {
+    width: 100%;
+    text-align: center;
+    padding: 10px 15px;
+  }
+}
