@@ -24,8 +24,12 @@ function App() {
   }, [tasks]);
 
   function handleAddTask(text) {
-    const nextId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
-    setTasks([...tasks, { id: nextId, text, completed: false }]);
+    const newTask = {
+      id: Date.now(),
+      text: text,
+      completed: false
+    };
+    setTasks([...tasks, newTask]);
   }
 
   function handleToggle(id) {
