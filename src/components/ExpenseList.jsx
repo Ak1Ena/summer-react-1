@@ -1,4 +1,5 @@
 import { useExpenses } from '../hooks/useExpenses';
+import styles from './ExpenseList.module.css';
 
 const COLORS = {
   Food: '#ff9500',
@@ -13,43 +14,43 @@ function ExpenseList({ onEdit }) {
   const { filteredExpenses, deleteExpense, filter, setFilter, categories } = useExpenses();
 
   return (
-    <div className="expense-list-section">
-      <div className="tabs">
+    <div className={styles.expenseListSection}>
+      <div className={styles.tabs}>
         {['All', ...categories].map((cat) => (
           <button
             key={cat}
             onClick={() => setFilter(cat)}
-            className={filter === cat ? 'tab active' : 'tab'}
+            className={`${styles.tab} ${filter === cat ? styles.active : ''}`}
           >
             {cat}
           </button>
         ))}
       </div>
-      <div className="expense-list">
+      <div className={styles.expenseList}>
         {filteredExpenses.length === 0 ? (
           <p className="no-data">No expenses found</p>
         ) : (
           filteredExpenses.map((exp) => (
-            <div key={exp.id} className="expense-item">
+            <div key={exp.id} className={styles.expenseItem}>
               <span
-                className="category-indicator"
+                className={styles.categoryIndicator}
                 style={{ background: COLORS[exp.category] || '#ccc' }}
               />
-              <div className="expense-details">
+              <div className={styles.expenseDetails}>
                 <b>{exp.name}</b>
-                <span className="expense-date">{exp.date}</span>
+                <span className={styles.expenseDate}>{exp.date}</span>
               </div>
-              <span className="expense-amount">${exp.amount.toFixed(2)}</span>
-              <div className="expense-actions">
+              <span className={styles.expenseAmount}>${exp.amount.toFixed(2)}</span>
+              <div className={styles.expenseActions}>
                 <button
-                  className="edit-btn"
+                  className={styles.editBtn}
                   onClick={() => onEdit(exp)}
                   title="Edit"
                 >
                   ✎
                 </button>
                 <button
-                  className="delete-btn"
+                  className={styles.deleteBtn}
                   onClick={() => deleteExpense(exp.id)}
                   title="Delete"
                 >

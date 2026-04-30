@@ -1,4 +1,5 @@
 import { useExpenses } from '../hooks/useExpenses';
+import styles from './ExpenseChart.module.css';
 
 const COLORS = {
   Food: '#ff9500',
@@ -22,25 +23,25 @@ function ExpenseChart() {
   const maxAmount = Math.max(...data.map((d) => d.amount), 1);
 
   return (
-    <div className="chart-section">
+    <div className={styles.chartSection}>
       <h3>Spending by Category</h3>
-      <div className="chart-container">
+      <div className={styles.chartContainer}>
         {data.length === 0 ? (
           <p className="no-data">No data to display</p>
         ) : (
           data.map((d) => (
-            <div key={d.category} className="bar-wrapper">
+            <div key={d.category} className={styles.barWrapper}>
               <div
-                className="bar"
+                className={styles.bar}
                 style={{
                   height: `${(d.amount / maxAmount) * 150}px`,
                   backgroundColor: COLORS[d.category] || '#ccc',
                 }}
                 title={`${d.category}: $${d.amount.toFixed(2)}`}
               >
-                <span className="bar-value">${d.amount.toFixed(0)}</span>
+                <span className={styles.barValue}>${d.amount.toFixed(0)}</span>
               </div>
-              <span className="bar-label">{d.category}</span>
+              <span className={styles.barLabel}>{d.category}</span>
             </div>
           ))
         )}

@@ -1,0 +1,66 @@
+.chartSection {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 32px;
+}
+
+.chartSection h3 {
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+}
+
+.chartContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 250px;
+  padding: 40px 60px 20px 60px;
+  margin-top: 20px;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  background: var(--bg-main);
+}
+
+.barWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 100px;
+  position: relative;
+}
+
+.bar {
+  width: 40px;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.bar:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+.barValue {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--primary-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.barLabel {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}

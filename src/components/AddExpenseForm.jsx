@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useExpenses } from '../hooks/useExpenses';
+import styles from './AddExpenseForm.module.css';
 
 function AddExpenseForm({ editingExpense, clearEditing }) {
   const { addExpense, updateExpense, categories } = useExpenses();
@@ -37,9 +38,9 @@ function AddExpenseForm({ editingExpense, clearEditing }) {
   }
 
   return (
-    <form className="add-form" onSubmit={handleSubmit}>
+    <form className={styles.addForm} onSubmit={handleSubmit}>
       <h3>{editingExpense ? 'Edit Transaction' : 'Add New Expense'}</h3>
-      {error && <p className="form-error">{error}</p>}
+      {error && <p className={styles.formError}>{error}</p>}
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -64,12 +65,12 @@ function AddExpenseForm({ editingExpense, clearEditing }) {
           </option>
         ))}
       </select>
-      <div className="form-actions">
-        <button type="submit" className="submit-btn">
+      <div className={styles.formActions}>
+        <button type="submit" className={styles.submitBtn}>
           {editingExpense ? 'Update Expense' : 'Add Expense'}
         </button>
         {editingExpense && (
-          <button type="button" className="cancel-btn" onClick={clearEditing}>
+          <button type="button" className={styles.cancelBtn} onClick={clearEditing}>
             Cancel
           </button>
         )}

@@ -1,0 +1,114 @@
+.expenseListSection {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 20px 28px;
+  background: var(--bg-main);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.tab.active {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-color: var(--primary);
+}
+
+.expenseList {
+  padding: 8px 28px;
+}
+
+.expenseItem {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--bg-main);
+}
+
+.expenseItem:last-child {
+  border-bottom: none;
+}
+
+.categoryIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.expenseDetails {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.expenseDetails b {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.expenseDate {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.expenseAmount {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin: 0 16px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 80px;
+}
+
+.expenseActions {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn, .deleteBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--bg-main);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.editBtn:hover {
+  color: var(--primary);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.deleteBtn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}

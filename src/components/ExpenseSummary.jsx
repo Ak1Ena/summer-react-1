@@ -1,4 +1,5 @@
 import { useExpenses } from '../hooks/useExpenses';
+import styles from './ExpenseSummary.module.css';
 
 function ExpenseSummary() {
   const { expenses, totalAmount, categories, budget, setBudget, exportToCSV } = useExpenses();
@@ -15,44 +16,44 @@ function ExpenseSummary() {
   const isOverBudget = totalAmount > budget;
 
   return (
-    <div className="summary">
-      <section className="total-section">
+    <div className={styles.summary}>
+      <section className={styles.totalSection}>
         <h3>Total Spent: ${totalAmount.toFixed(2)}</h3>
         <p>{expenses.length} transactions</p>
       </section>
 
-      <section className="budget-section">
-        <div className="budget-header">
+      <section className={styles.budgetSection}>
+        <div className={styles.budgetHeader}>
           <h4>Monthly Budget</h4>
           <input
             type="number"
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            className="budget-input"
+            className={styles.budgetInput}
           />
         </div>
-        <div className="progress-container">
+        <div className={styles.progressContainer}>
           <div
-            className={`progress-bar ${isOverBudget ? 'over' : ''}`}
+            className={`${styles.progressBar} ${isOverBudget ? styles.over : ''}`}
             style={{ width: `${percentUsed}%` }}
           ></div>
         </div>
-        <p className={`budget-status ${isOverBudget ? 'danger' : ''}`}>
+        <p className={`${styles.budgetStatus} ${isOverBudget ? styles.danger : ''}`}>
           {percentUsed.toFixed(1)}% used
         </p>
       </section>
 
-      <section className="category-breakdown">
+      <section className={styles.categoryBreakdown}>
         <h4>Breakdown</h4>
         {Object.entries(byCategory).map(([cat, amt]) => (
-          <div key={cat} className="category-item">
+          <div key={cat} className={styles.categoryItem}>
             <span>{cat}</span>
             <span>${amt.toFixed(2)}</span>
           </div>
         ))}
       </section>
 
-      <button onClick={exportToCSV} className="export-btn">
+      <button onClick={exportToCSV} className={styles.exportBtn}>
         📥 Export CSV
       </button>
     </div>

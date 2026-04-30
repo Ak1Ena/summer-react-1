@@ -1,16 +1,51 @@
-# React + Vite
+# 💰 Expense Tracker Pro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive expense tracking application built with React 19 and Vite.
 
-Currently, two official plugins are available:
+![App Screenshot](https://via.placeholder.com/800x450?text=Expense+Tracker+Pro+Screenshot)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+- **Expense Management**: Add, edit, and delete transactions.
+- **Visual Analytics**: Dynamic spending chart by category.
+- **Budgeting**: Set a monthly budget and track your progress.
+- **Categorization**: Filter expenses by category (Food, Transport, Health, etc.).
+- **Data Export**: Export your transaction list to CSV.
+- **Dark Mode**: Support for light and dark themes using CSS Modules.
+- **Weather Integration**: Displays current weather using OpenWeather API.
+- **Responsive Design**: Optimized for both desktop and mobile.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React 19** (Functional Components, Hooks, Context API)
+- **Vite** (Build Tool)
+- **CSS Modules** (Scoped Styling)
+- **OpenWeather API** (Weather Data)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file from `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+4. Add your OpenWeather API key in `.env`.
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 🔐 Environment Variables
+
+- `VITE_APP_APP_TITLE`: The title shown in the header.
+- `VITE_APP_VERSION`: Current version of the app.
+- `VITE_OPENWEATHER_API_KEY`: Your API key from [OpenWeatherMap](https://openweathermap.org/api).
+- `VITE_WEATHER_CITY`: The city for which weather is displayed.
+
+## 📝 License
+
+MIT

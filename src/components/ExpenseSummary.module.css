@@ -1,0 +1,129 @@
+.summary {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: sticky;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.totalSection h3 {
+  color: var(--primary-dark);
+  font-size: 1.75rem;
+  margin-bottom: 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+.totalSection p {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.budgetHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.budgetHeader h4,
+.categoryBreakdown h4 {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.budgetInput {
+  width: 90px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-card);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.budgetInput:focus {
+  border-color: var(--primary);
+}
+
+.progressContainer {
+  height: 10px;
+  background: var(--bg-main);
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+  border-radius: 5px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progressBar.over {
+  background: linear-gradient(90deg, #f87171 0%, #ef4444 100%);
+}
+
+.budgetStatus {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.budgetStatus.danger {
+  color: #ef4444;
+}
+
+.categoryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg-main);
+  font-weight: 500;
+  gap: 12px;
+}
+
+.categoryItem span:last-child {
+  text-align: right;
+  word-break: break-all;
+}
+
+.exportBtn {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border: none;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.exportBtn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .summary {
+    position: static;
+  }
+}
