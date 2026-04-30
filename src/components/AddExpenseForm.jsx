@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useExpenses } from '../context/ExpenseContext';
+import { useExpenses } from '../hooks/useExpenses';
 
-function AddExpenseForm() {
-  const { addExpense, categories } = useExpenses();
-  const [name, setName] = useState('');
-  const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState(categories[0]);
+function AddExpenseForm({ editingExpense, clearEditing }) {
+  const { addExpense, updateExpense, categories } = useExpenses();
+  const [name, setName] = useState(editingExpense?.name || '');
+  const [amount, setAmount] = useState(editingExpense?.amount?.toString() || '');
+  const [category, setCategory] = useState(editingExpense?.category || categories[0]);
+  const [date, setDate] = useState(editingExpense?.date || new Date().toISOString().split('T')[0]);
   const [error, setError] = useState('');
 
   function handleSubmit(e) {
@@ -18,14 +19,34 @@ function AddExpenseForm() {
       setError('Enter amount');
       return;
     }
-    addExpense(name.trim(), amount, category);
+    if (!date) {
+      setError('Select date');
+      return;
+    }
+
+    const expenseData = {
+      name: name.trim(),
+      amount: parseFloat(amount),
+      category,
+      date,
+    };
+
+    if (editingExpense) {
+      updateExpense({ ...expenseData, id: editingExpense.id });
+      clearEditing();
+    } else {
+      addExpense(expenseData);
+    }
+
     setName('');
     setAmount('');
+    setDate(new Date().toISOString().split('T')[0]);
     setError('');
   }
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
+      <h3>{editingExpense ? 'Edit Expense' : 'Add New Expense'}</h3>
       {error && <p className="form-error">{error}</p>}
       <input
         value={name}
@@ -34,9 +55,15 @@ function AddExpenseForm() {
       />
       <input
         type="number"
+        step="0.01"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         placeholder="Amount"
+      />
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
       />
       <select value={category} onChange={(e) => setCategory(e.target.value)}>
         {categories.map((c) => (
@@ -45,7 +72,14 @@ function AddExpenseForm() {
           </option>
         ))}
       </select>
-      <button type="submit">Add</button>
+      <div className="form-actions">
+        <button type="submit">{editingExpense ? 'Update' : 'Add'}</button>
+        {editingExpense && (
+          <button type="button" className="cancel-btn" onClick={clearEditing}>
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 }

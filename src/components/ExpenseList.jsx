@@ -1,4 +1,4 @@
-import { useExpenses } from '../context/ExpenseContext';
+import { useExpenses } from '../hooks/useExpenses';
 
 const COLORS = {
   Food: '#ff9500',
@@ -9,7 +9,7 @@ const COLORS = {
   Other: '#6b7280',
 };
 
-function ExpenseList() {
+function ExpenseList({ onEdit }) {
   const { filteredExpenses, deleteExpense, filter, setFilter, categories } = useExpenses();
 
   return (
@@ -26,22 +26,39 @@ function ExpenseList() {
         ))}
       </div>
       <div className="expense-list">
-        {filteredExpenses.map((exp) => (
-          <div key={exp.id} className="expense-item">
-            <span
-              className="category-indicator"
-              style={{ background: COLORS[exp.category] || '#ccc' }}
-            />
-            <b>{exp.name}</b>
-            <span>${exp.amount.toFixed(2)}</span>
-            <button
-              className="delete-btn"
-              onClick={() => deleteExpense(exp.id)}
-            >
-              ✕
-            </button>
-          </div>
-        ))}
+        {filteredExpenses.length === 0 ? (
+          <p className="no-data">No expenses found</p>
+        ) : (
+          filteredExpenses.map((exp) => (
+            <div key={exp.id} className="expense-item">
+              <span
+                className="category-indicator"
+                style={{ background: COLORS[exp.category] || '#ccc' }}
+              />
+              <div className="expense-details">
+                <b>{exp.name}</b>
+                <span className="expense-date">{exp.date}</span>
+              </div>
+              <span className="expense-amount">${exp.amount.toFixed(2)}</span>
+              <div className="expense-actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => onEdit(exp)}
+                  title="Edit"
+                >
+                  ✎
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteExpense(exp.id)}
+                  title="Delete"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
