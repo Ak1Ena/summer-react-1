@@ -1,88 +1,143 @@
-:root {
-  --bg: #ffffff;
-  --text: #000000;
-  --muted: #999999;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  margin: 0;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  line-height: 1.4;
+  font-family: Arial, sans-serif;
+  background: #f5f6f7;
 }
 
-#root {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-}
-
-h1 {
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  text-align: center;
-  margin: 0;
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 header {
+  background: #047857;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+}
+
+.summary {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.summary h3 {
+  margin-bottom: 10px;
+  color: #047857;
+}
+
+.summary div {
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.add-form,
+.expense-list-section {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.add-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-header h1 {
-  text-align: left;
-  font-size: 1.5rem;
-  text-transform: none;
-  letter-spacing: normal;
-  font-weight: 600;
+.add-form input,
+.add-form select,
+.add-form button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
-header p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.card {
-  margin-top: 20px;
-}
-
-.card-title {
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
-}
-
-.tips-block h2 {
-  display: none;
-}
-
-.tip-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.tip-list li {
-  font-size: 1.1rem;
+.add-form button {
+  background: #047857;
+  color: white;
+  border: none;
   cursor: pointer;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  transition: color 0.2s;
+  font-weight: bold;
 }
 
-.tip-list li:hover {
-  color: var(--muted);
+.form-error {
+  color: #dc2626;
+  font-size: 0.9em;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab.active {
+  background: #047857;
+  color: white;
+  border-color: #047857;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.category-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.expense-item b {
+  flex: 1;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+}
+
+@media (max-width: 700px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
 }
