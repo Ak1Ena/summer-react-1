@@ -54,6 +54,16 @@
   transition: border-color 0.2s;
 }
 
+.budgetInput::-webkit-inner-spin-button,
+.budgetInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.budgetInput {
+  -moz-appearance: textfield;
+}
+
 .budgetInput:focus {
   border-color: var(--primary);
 }

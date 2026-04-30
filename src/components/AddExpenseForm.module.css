@@ -36,6 +36,16 @@
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
+.addForm input[type=number]::-webkit-inner-spin-button,
+.addForm input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.addForm input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .formActions {
   grid-column: 1 / -1;
   display: flex;
