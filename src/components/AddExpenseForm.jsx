@@ -11,16 +11,8 @@ function AddExpenseForm({ editingExpense, clearEditing }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!name.trim()) {
-      setError('Enter name');
-      return;
-    }
-    if (!amount || parseFloat(amount) <= 0) {
-      setError('Enter amount');
-      return;
-    }
-    if (!date) {
-      setError('Select date');
+    if (!name.trim() || !amount || parseFloat(amount) <= 0) {
+      setError('Please fill in all fields');
       return;
     }
 
@@ -46,19 +38,19 @@ function AddExpenseForm({ editingExpense, clearEditing }) {
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
-      <h3>{editingExpense ? 'Edit Expense' : 'Add New Expense'}</h3>
+      <h3>{editingExpense ? 'Edit Transaction' : 'Add New Expense'}</h3>
       {error && <p className="form-error">{error}</p>}
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Expense name"
+        placeholder="Expense Name (e.g., Grocery)"
       />
       <input
         type="number"
         step="0.01"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        placeholder="Amount"
+        placeholder="Amount ($)"
       />
       <input
         type="date"
@@ -73,7 +65,9 @@ function AddExpenseForm({ editingExpense, clearEditing }) {
         ))}
       </select>
       <div className="form-actions">
-        <button type="submit">{editingExpense ? 'Update' : 'Add'}</button>
+        <button type="submit" className="submit-btn">
+          {editingExpense ? 'Update Expense' : 'Add Expense'}
+        </button>
         {editingExpense && (
           <button type="button" className="cancel-btn" onClick={clearEditing}>
             Cancel
