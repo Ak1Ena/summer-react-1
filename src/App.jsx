@@ -6,7 +6,7 @@ import ExpenseList from './components/ExpenseList';
 import ExpenseChart from './components/ExpenseChart';
 import ThemeToggle from './components/ThemeToggle';
 import Weather from './components/Weather';
-import styles from './App.module.css';
+import styles from './assets/App.module.css';
 
 function App() {
   const [editingExpense, setEditingExpense] = useState(null);

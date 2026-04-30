@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useExpenses } from '../hooks/useExpenses';
-import styles from './AddExpenseForm.module.css';
+import styles from '../assets/AddExpenseForm.module.css';
 
 function AddExpenseForm({ editingExpense, clearEditing }) {
   const { addExpense, updateExpense, categories } = useExpenses();

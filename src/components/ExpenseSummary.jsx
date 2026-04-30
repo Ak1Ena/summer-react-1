@@ -1,5 +1,5 @@
 import { useExpenses } from '../hooks/useExpenses';
-import styles from './ExpenseSummary.module.css';
+import styles from '../assets/ExpenseSummary.module.css';
 
 function ExpenseSummary() {
   const { expenses, totalAmount, categories, budget, setBudget, exportToCSV } = useExpenses();

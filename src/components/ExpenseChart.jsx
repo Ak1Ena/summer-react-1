@@ -1,5 +1,5 @@
 import { useExpenses } from '../hooks/useExpenses';
-import styles from './ExpenseChart.module.css';
+import styles from '../assets/ExpenseChart.module.css';
 
 const COLORS = {
   Food: '#ff9500',
