@@ -26,14 +26,13 @@ function StudentTable({ students, onDelete, onEdit }) {
 							<button 
 								className="btn-edit" 
 								onClick={() => onEdit(student)}
-								style={{ marginRight: '8px', padding: '4px 8px', cursor: 'pointer' }}
 							>
 								Edit
 							</button>
 							<button 
 								className="btn-delete" 
 								onClick={() => onDelete(student.id)}
-								style={{ padding: '4px 8px', cursor: 'pointer', backgroundColor: '#ff4d4d', color: 'white', border: 'none', borderRadius: '4px' }}
+								style={{ marginLeft: '8px' }}
 							>
 								Delete
 							</button>

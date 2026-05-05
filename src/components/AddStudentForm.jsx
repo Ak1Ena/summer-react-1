@@ -83,7 +83,7 @@ function AddStudentForm({ onAddStudent, onUpdateStudent, editingStudent, onCance
 					{editingStudent ? "Update Student" : "+ Add Student"}
 				</button>
 				{editingStudent && (
-					<button type="button" className="btn-secondary" onClick={onCancelEdit} style={{ marginLeft: '8px' }}>
+					<button type="button" className="btn-secondary" onClick={onCancelEdit}>
 						Cancel
 					</button>
 				)}
