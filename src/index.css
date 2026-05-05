@@ -1,20 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 :root {
-  --font-main: 'Outfit', sans-serif;
+  --font-main: 'Manrope', sans-serif;
   
-  /* Prism Light Palette */
-  --bg-aura: #f8faff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  
-  /* The "Rich" Accents */
-  --prism-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.8);
-  
-  --shadow-luxe: 0 30px 60px -12px rgba(50, 50, 93, 0.1), 0 18px 36px -18px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 50px 100px -20px rgba(50, 50, 93, 0.15), 0 30px 60px -30px rgba(0, 0, 0, 0.2);
+  /* Studio Minimalist Palette */
+  --bg-app: #f9f9f9;
+  --bg-card: #ffffff;
+  --text-main: #1a1a1a;
+  --text-muted: #737373;
+  --accent: #2563eb;
+  --border: #e5e5e5;
+  --border-strong: #1a1a1a;
 }
 
 * {
@@ -25,27 +21,25 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg-aura);
-  /* Animated Mesh Gradient Background */
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(34, 211, 238, 0.08) 0px, transparent 50%);
-  background-attachment: fixed;
+  background-color: var(--bg-app);
   color: var(--text-main);
-  line-height: 1.6;
-  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 8rem 4rem;
+  padding: 6rem 2rem;
 }
 
-/* Luxury Transitions */
-.transition-smooth {
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+/* Subtle fade in for the whole interface */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.app-container {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
