@@ -148,14 +148,14 @@
 }
 
 .btn-delete {
-  background: #fee2e2;
-  color: #dc2626;
+  background: #000000;
+  color: #ffffff;
   padding: 0.4rem 0.8rem;
   font-size: 0.8rem;
 }
 
 .btn-delete:hover {
-  background: #fecaca;
+  background: #333333;
 }
 
 .form-error {
@@ -169,10 +169,19 @@
 }
 
 /* Action column width */
-.student-table th:last-child,
+.student-table th:last-child {
+  text-align: right;
+  width: 150px;
+}
+
 .student-table td:last-child {
   text-align: right;
   width: 150px;
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Student Table - Precision Rows */

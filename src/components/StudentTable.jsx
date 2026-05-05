@@ -32,7 +32,6 @@ function StudentTable({ students, onDelete, onEdit }) {
 							<button 
 								className="btn-delete" 
 								onClick={() => onDelete(student.id)}
-								style={{ marginLeft: '8px' }}
 							>
 								Delete
 							</button>
