@@ -1,8 +1,14 @@
 import { useState } from "react";
 const EMPTY_FORM = { name: "", studentId: "", major: "", gpa: "" };
-function AddStudentForm({ onAddStudent }) {
-	const [formData, setFormData] = useState(EMPTY_FORM);
+function AddStudentForm({ onAddStudent, onUpdateStudent, editingStudent, onCancelEdit }) {
+	const [formData, setFormData] = useState(editingStudent ? {
+		name: editingStudent.name,
+		studentId: editingStudent.studentId,
+		major: editingStudent.major,
+		gpa: editingStudent.gpa.toString(),
+	} : EMPTY_FORM);
 	const [error, setError] = useState("");
+
 	// Single handler for ALL inputs via computed property name
 	function handleChange(e) {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,19 +26,29 @@ function AddStudentForm({ onAddStudent }) {
 			return;
 		}
 
-		onAddStudent({
-			id: Date.now(), // Temporary ID — Session 4 uses API-generated IDs
-			name: formData.name.trim(),
-			studentId: formData.studentId.trim(),
-			major: formData.major.trim() || "Undeclared",
-			gpa: gpaNum,
-		});
+		if (editingStudent) {
+			onUpdateStudent({
+				...editingStudent,
+				name: formData.name.trim(),
+				studentId: formData.studentId.trim(),
+				major: formData.major.trim() || "Undeclared",
+				gpa: gpaNum,
+			});
+		} else {
+			onAddStudent({
+				id: Date.now(), // Temporary ID — Session 4 uses API-generated IDs
+				name: formData.name.trim(),
+				studentId: formData.studentId.trim(),
+				major: formData.major.trim() || "Undeclared",
+				gpa: gpaNum,
+			});
+		}
 		setFormData(EMPTY_FORM); // Reset form after successful submit
 		setError("");
 	}
 	return (
 		<form className="add-form" onSubmit={handleSubmit}>
-			<h3>Add New Student</h3>
+			<h3>{editingStudent ? "Edit Student" : "Add New Student"}</h3>
 			{error && <p className="form-error">{error}</p>}
 			<div className="form-row">
 				<input
@@ -64,8 +80,13 @@ function AddStudentForm({ onAddStudent }) {
 					max="4"
 				/>
 				<button type="submit" className="btn-primary">
-					+ Add Student
+					{editingStudent ? "Update Student" : "+ Add Student"}
 				</button>
+				{editingStudent && (
+					<button type="button" className="btn-secondary" onClick={onCancelEdit} style={{ marginLeft: '8px' }}>
+						Cancel
+					</button>
+				)}
 			</div>
 		</form>
 	);
