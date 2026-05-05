@@ -1,0 +1,223 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem; /* Maximum breathing room */
+}
+
+.app-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: var(--prism-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.app-header p {
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+/* GPA Summary - The Rich Prism Cards */
+.gpa-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 4rem;
+}
+
+.stat-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  padding: 4rem 3rem;
+  border-radius: 48px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-luxe);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-20px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 48px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent, rgba(255,255,255,0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  margin-bottom: 2rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Highlight Card - Prism Glow */
+.stat-card.highlight {
+  background: white;
+}
+
+.stat-card.highlight .stat-value {
+  background: var(--prism-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-card.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  width: 60%;
+  height: 20px;
+  background: var(--prism-primary);
+  filter: blur(40px);
+  opacity: 0.3;
+}
+
+/* Add Student Form - Sophisticated Cleanliness */
+.add-form {
+  background: white;
+  padding: 6rem;
+  border-radius: 64px;
+  box-shadow: var(--shadow-luxe);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.add-form h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+}
+
+.form-row input {
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  padding: 1.5rem 2rem;
+  border-radius: 24px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.form-row input:focus {
+  outline: none;
+  background: white;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.1);
+}
+
+.btn-primary {
+  background: var(--prism-primary);
+  color: white;
+  padding: 1.5rem 3rem;
+  border-radius: 24px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s;
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+}
+
+/* Student Table - Modern Floating List */
+.student-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2rem;
+}
+
+.student-table th {
+  padding: 1rem 3rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.student-table tr td {
+  background: white;
+  padding: 2.5rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-luxe);
+  transition: all 0.4s;
+}
+
+.student-table tr td:first-child { border-radius: 32px 0 0 32px; }
+.student-table tr td:last-child { border-radius: 0 32px 32px 0; }
+
+.student-table tr:hover td {
+  transform: scale(1.01);
+  background: #fafbff;
+}
+
+.high-gpa .gpa-cell {
+  background: var(--prism-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.gpa-cell {
+  font-size: 2rem;
+}
+
+@media (max-width: 1024px) {
+  #root { padding: 4rem 2rem; }
+  .app-container { gap: 6rem; }
+  .add-form { padding: 3rem; }
+}
+
+@media (max-width: 768px) {
+  .app-header h1 { font-size: 3rem; }
+  .stat-card { padding: 3rem 2rem; }
+  .stat-value { font-size: 3rem; }
+}
