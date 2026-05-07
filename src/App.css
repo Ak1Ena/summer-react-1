@@ -15,6 +15,31 @@
   margin-bottom: 0.5rem;
 }
 
+.app-nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 1rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+}
+
+.nav-link.active {
+  color: var(--text-main);
+  border-bottom-color: var(--border-strong);
+}
+
 .app-header p {
   color: var(--text-muted);
   font-size: 1rem;
@@ -89,7 +114,7 @@
   margin-top: 0.5rem;
 }
 
-.form-row input {
+.form-row input, .form-row select {
   background: transparent;
   border: 1px solid var(--border);
   padding: 0.75rem 1rem;
@@ -97,9 +122,20 @@
   font-family: inherit;
   font-size: 0.9rem;
   transition: all 0.2s;
+  color: var(--text-main);
 }
 
-.form-row input:focus {
+.form-row select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+.form-row input:focus, .form-row select:focus {
   outline: none;
   border-color: var(--border-strong);
 }
@@ -226,6 +262,26 @@
   border: 1px dashed var(--border);
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+.extra-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  border-top: 1px solid var(--border);
+  padding-top: 4rem;
+}
+
+.section-container h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .extra-sections {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
