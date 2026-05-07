@@ -6,12 +6,9 @@ import {
   updateStudentAsync,
   fetchStudents,
 } from "../features/students/studentsThunks";
-import {
-  selectAllStudents,
-  selectStudentsStatus,
-  selectStudentsError,
-} from "../features/students/selectors";
+import { selectAllStudents, selectStudentsStatus, selectStudentsError } from "../features/students/selectors";
 import EditModal from "./EditModal";
+import ConfirmModal from "./ConfirmModal";
 
 function StudentTable() {
   const dispatch = useDispatch();
@@ -19,13 +16,13 @@ function StudentTable() {
   const status = useSelector(selectStudentsStatus);
   const error = useSelector(selectStudentsError);
 
-  // Local UI state - modal open/close and which student is being edited
+  // Local UI state
   const [editing, setEditing] = useState(null); // null = modal closed
+  const [deletingId, setDeletingId] = useState(null);
 
-  function handleDelete(id) {
-    if (window.confirm("Delete this student?")) {
-      dispatch(deleteStudentAsync(id));
-    }
+  function handleDeleteConfirm() {
+    dispatch(deleteStudentAsync(deletingId));
+    setDeletingId(null);
   }
 
   function handleEditSave(updatedData) {
@@ -80,7 +77,7 @@ function StudentTable() {
               <td className="gpa-cell">{student.gpa.toFixed(2)}</td>
               <td>
                 <button className="btn-edit" onClick={() => setEditing(student)}>Edit</button>
-                <button className="btn-delete" onClick={() => handleDelete(student.id)}>Delete</button>
+                <button className="btn-delete" onClick={() => setDeletingId(student.id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -91,6 +88,14 @@ function StudentTable() {
           student={editing}
           onSave={handleEditSave}
           onCancel={() => setEditing(null)}
+        />
+      )}
+      {deletingId && (
+        <ConfirmModal
+          title="Delete Student"
+          message="Are you sure you want to delete this student? This action cannot be undone."
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setDeletingId(null)}
         />
       )}
     </>
