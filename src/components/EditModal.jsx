@@ -9,8 +9,9 @@ function EditModal({ student, onSave, onCancel }) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className="modal-overlay" onClick={onCancel}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onCancel}>&times;</button>
         <h3>Edit Student</h3>
         <input name="name" value={form.name} onChange={onChange} placeholder="Full Name" />
         <input name="major" value={form.major} onChange={onChange} placeholder="Major" />

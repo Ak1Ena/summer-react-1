@@ -1,9 +1,10 @@
-// src/components/StudentTable.jsx - Session 3 version
+// src/components/StudentTable.jsx - Session 3 version with Modal Improvements
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteStudent, updateStudent } from "../features/students/studentsSlice";
 import { selectAllStudents } from "../features/students/selectors";
 import EditModal from "./EditModal";
+import ConfirmModal from "./ConfirmModal";
 
 function StudentTable() {
   const dispatch = useDispatch();
@@ -11,11 +12,11 @@ function StudentTable() {
 
   // Local UI state - modal open/close and which student is being edited
   const [editing, setEditing] = useState(null); // null = modal closed
+  const [deletingId, setDeletingId] = useState(null);
 
-  function handleDelete(id) {
-    if (window.confirm("Delete this student?")) {
-      dispatch(deleteStudent(id));
-    }
+  function handleDeleteConfirm() {
+    dispatch(deleteStudent(deletingId));
+    setDeletingId(null);
   }
 
   function handleEditSave(updatedData) {
@@ -50,7 +51,7 @@ function StudentTable() {
               <td className="gpa-cell">{student.gpa.toFixed(2)}</td>
               <td>
                 <button className="btn-edit" onClick={() => setEditing(student)}>Edit</button>
-                <button className="btn-delete" onClick={() => handleDelete(student.id)}>Delete</button>
+                <button className="btn-delete" onClick={() => setDeletingId(student.id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -61,6 +62,14 @@ function StudentTable() {
           student={editing}
           onSave={handleEditSave}
           onCancel={() => setEditing(null)}
+        />
+      )}
+      {deletingId && (
+        <ConfirmModal
+          title="Delete Student"
+          message="Are you sure you want to delete this student? This action cannot be undone."
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setDeletingId(null)}
         />
       )}
     </>

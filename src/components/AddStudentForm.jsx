@@ -1,4 +1,3 @@
-// src/components/AddStudentForm.jsx - Session 3
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../features/students/studentsSlice";
