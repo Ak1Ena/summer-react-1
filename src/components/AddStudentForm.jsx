@@ -1,7 +1,7 @@
-// src/components/AddStudentForm.jsx - Session 3
+// src/components/AddStudentForm.jsx - Session 4 (Async)
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addStudent } from "../features/students/studentsSlice";
+import { addStudentAsync } from "../features/students/studentsThunks";
 
 const EMPTY_FORM = { name: "", studentId: "", major: "", gpa: "" };
 
@@ -15,11 +15,17 @@ function AddStudentForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    dispatch(addStudent({ id: Date.now(), ...form, gpa: parseFloat(form.gpa) || 0 }));
-    setForm(EMPTY_FORM); // Reset form after successful submit
-    setError("");
+    try {
+      await dispatch(
+        addStudentAsync({ ...form, gpa: parseFloat(form.gpa) || 0 })
+      ).unwrap();
+      setForm(EMPTY_FORM); // Reset form after successful submit
+      setError("");
+    } catch (err) {
+      setError(err || "Failed to add student");
+    }
   }
 
   return (

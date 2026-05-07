@@ -1,28 +1,46 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  fetchCourses,
+  addCourseAsync,
+  updateCourseAsync,
+  deleteCourseAsync,
+} from './coursesThunks';
 
 const coursesSlice = createSlice({
   name: 'courses',
   initialState: {
-    list: [
-      { id: 1, code: 'CS101', title: 'Data Structures', credits: 3, dept: 'CS' },
-      { id: 2, code: 'AI201', title: 'AI Fundamentals', credits: 3, dept: 'CS' },
-      { id: 3, code: 'WD301', title: 'Web Development', credits: 3, dept: 'IT' },
-      { id: 4, code: 'NS401', title: 'Network Security', credits: 3, dept: 'IT' },
-    ]
+    list: [],
+    status: 'idle',
+    error: null,
   },
-  reducers: {
-    addCourse: (state, action) => {
-      state.list.push(action.payload);
-    },
-    deleteCourse: (state, action) => {
-      state.list = state.list.filter(c => c.id !== action.payload);
-    },
-    updateCourse: (state, action) => {
-      const idx = state.list.findIndex(c => c.id === action.payload.id);
-      if (idx !== -1) state.list[idx] = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCourses.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchCourses.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.list = action.payload;
+      })
+      .addCase(fetchCourses.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(addCourseAsync.fulfilled, (state, action) => {
+        state.list.push(action.payload);
+      })
+      .addCase(updateCourseAsync.fulfilled, (state, action) => {
+        const index = state.list.findIndex((c) => c.id === action.payload.id);
+        if (index !== -1) {
+          state.list[index] = action.payload;
+        }
+      })
+      .addCase(deleteCourseAsync.fulfilled, (state, action) => {
+        state.list = state.list.filter((c) => c.id !== action.payload);
+      });
   },
 });
 
-export const { addCourse, deleteCourse, updateCourse } = coursesSlice.actions;
 export default coursesSlice.reducer;

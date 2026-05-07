@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCourse, updateCourse } from '../features/courses/coursesSlice';
+import { addCourseAsync, updateCourseAsync } from '../features/courses/coursesThunks';
 
 function CourseForm({ editingCourse, onCancel }) {
   const dispatch = useDispatch();
@@ -24,9 +24,9 @@ function CourseForm({ editingCourse, onCancel }) {
     if (!formData.code || !formData.title || !formData.credits || !formData.dept) return;
 
     if (editingCourse) {
-      dispatch(updateCourse(formData));
+      dispatch(updateCourseAsync(formData));
     } else {
-      dispatch(addCourse({ ...formData, id: Date.now() }));
+      dispatch(addCourseAsync(formData));
     }
     
     setFormData({ code: '', title: '', credits: '', dept: '' });

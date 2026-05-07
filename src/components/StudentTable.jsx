@@ -1,27 +1,57 @@
-// src/components/StudentTable.jsx - Session 3 version
+// src/components/StudentTable.jsx - Session 4 version (Async)
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteStudent, updateStudent } from "../features/students/studentsSlice";
-import { selectAllStudents } from "../features/students/selectors";
+import {
+  deleteStudentAsync,
+  updateStudentAsync,
+  fetchStudents,
+} from "../features/students/studentsThunks";
+import {
+  selectAllStudents,
+  selectStudentsStatus,
+  selectStudentsError,
+} from "../features/students/selectors";
 import EditModal from "./EditModal";
 
 function StudentTable() {
   const dispatch = useDispatch();
   const students = useSelector(selectAllStudents);
+  const status = useSelector(selectStudentsStatus);
+  const error = useSelector(selectStudentsError);
 
   // Local UI state - modal open/close and which student is being edited
   const [editing, setEditing] = useState(null); // null = modal closed
 
   function handleDelete(id) {
     if (window.confirm("Delete this student?")) {
-      dispatch(deleteStudent(id));
+      dispatch(deleteStudentAsync(id));
     }
   }
 
   function handleEditSave(updatedData) {
-    dispatch(updateStudent({ ...updatedData, gpa: parseFloat(updatedData.gpa) || 0 }));
+    dispatch(
+      updateStudentAsync({
+        ...updatedData,
+        gpa: parseFloat(updatedData.gpa) || 0,
+      })
+    );
     setEditing(null); // Close modal after update
   }
+
+  if (status === "loading") {
+    return <div className="spinner">Loading students...</div>;
+  }
+
+  if (status === "failed") {
+    return (
+      <div className="error-banner">
+        <p>Error: {error}</p>
+        <button onClick={() => dispatch(fetchStudents())}>Retry</button>
+      </div>
+    );
+  }
+
+  if (status !== "succeeded") return null;
 
   if (students.length === 0) {
     return <p className="empty-state">No students yet. Add one above!</p>;
