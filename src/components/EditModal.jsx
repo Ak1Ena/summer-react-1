@@ -12,9 +12,9 @@ function EditModal({ student, onSave, onCancel }) {
     <div className="modal-overlay">
       <div className="modal">
         <h3>Edit Student</h3>
-        <input name="name" value={form.name} onChange={onChange} />
-        <input name="major" value={form.major} onChange={onChange} />
-        <input name="gpa" value={form.gpa} onChange={onChange} type="number" step="0.01" />
+        <input name="name" value={form.name} onChange={onChange} placeholder="Full Name" />
+        <input name="major" value={form.major} onChange={onChange} placeholder="Major" />
+        <input name="gpa" value={form.gpa} onChange={onChange} type="number" step="0.01" placeholder="GPA" />
         <div className="modal-actions">
           <button onClick={() => onSave(form)}>Save</button>
           <button onClick={onCancel}>Cancel</button>

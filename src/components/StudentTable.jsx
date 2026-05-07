@@ -49,8 +49,8 @@ function StudentTable() {
               <td>{student.major}</td>
               <td className="gpa-cell">{student.gpa.toFixed(2)}</td>
               <td>
-                <button onClick={() => setEditing(student)}>Edit</button>
-                <button onClick={() => handleDelete(student.id)}>Delete</button>
+                <button className="btn-edit" onClick={() => setEditing(student)}>Edit</button>
+                <button className="btn-delete" onClick={() => handleDelete(student.id)}>Delete</button>
               </td>
             </tr>
           ))}

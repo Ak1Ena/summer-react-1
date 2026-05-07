@@ -25,6 +25,7 @@ function AddStudentForm() {
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>Add New Student</h3>
+      {error && <p className="form-error">{error}</p>}
       <div className="form-row">
         <input
           name="name"
