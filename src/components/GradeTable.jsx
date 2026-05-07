@@ -4,12 +4,13 @@ function GradeTable({ grades, students, courses, onEdit, onDelete }) {
   }
 
   const getStudentName = (id) => {
-    const student = students.find((s) => s.id === id);
+    // Use == for loose equality as IDs might be strings from API but numbers in local state
+    const student = students.find((s) => s.id == id);
     return student ? student.name : 'Unknown Student';
   };
 
   const getCourseTitle = (id) => {
-    const course = courses.find((c) => c.id === id);
+    const course = courses.find((c) => c.id == id);
     return course ? `${course.code}: ${course.title}` : 'Unknown Course';
   };
 

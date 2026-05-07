@@ -15,7 +15,11 @@ function GradeForm({ editingGrade, onCancel }) {
 
   useEffect(() => {
     if (editingGrade) {
-      setFormData(editingGrade);
+      setFormData({
+        ...editingGrade,
+        studentId: String(editingGrade.studentId),
+        courseId: String(editingGrade.courseId),
+      });
     } else {
       setFormData({ studentId: '', courseId: '', grade: '' });
     }
@@ -27,8 +31,8 @@ function GradeForm({ editingGrade, onCancel }) {
 
     const payload = {
       ...formData,
-      studentId: Number(formData.studentId),
-      courseId: Number(formData.courseId),
+      studentId: formData.studentId, // Keep as string or number based on what was selected
+      courseId: formData.courseId,
     };
 
     if (editingGrade) {
