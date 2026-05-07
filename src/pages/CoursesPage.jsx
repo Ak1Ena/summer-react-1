@@ -31,8 +31,12 @@ function CoursesPage() {
   };
 
   if (status === 'loading') {
-    return <div className="spinner">Loading courses...</div>;
-  }
+    return (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+        <p>Loading courses...</p>
+      </div>
+  );  }
 
   if (status === 'failed') {
     return (

@@ -12,7 +12,6 @@ function CourseTable({ courses, onEdit, onDelete }) {
             <th>Code</th>
             <th>Title</th>
             <th>Credits</th>
-            <th>Dept</th>
             <th style={{ textAlign: 'right' }}>Actions</th>
           </tr>
         </thead>
@@ -21,8 +20,7 @@ function CourseTable({ courses, onEdit, onDelete }) {
             <tr key={course.id}>
               <td>{course.code}</td>
               <td>{course.title}</td>
-              <td>{course.credits}</td>
-              <td>{course.dept}</td>
+              <td>{course.credit}</td>
               <td style={{ textAlign: 'right' }}>
                 <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                   <button className="btn-edit" onClick={() => onEdit(course)}>Edit</button>

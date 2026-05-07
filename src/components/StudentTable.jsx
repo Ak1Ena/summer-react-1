@@ -36,7 +36,12 @@ function StudentTable() {
   }
 
   if (status === "loading") {
-    return <div className="spinner">Loading students...</div>;
+    return (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+        <p>Loading students...</p>
+      </div>
+    );
   }
 
   if (status === "failed") {
