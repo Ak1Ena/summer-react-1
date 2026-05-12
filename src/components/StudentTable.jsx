@@ -1,4 +1,4 @@
-// src/components/StudentTable.jsx - Session 4 version (Async)
+// src/components/StudentTable.jsx - Lab 5 version (Optimized)
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -6,9 +6,44 @@ import {
   updateStudentAsync,
   fetchStudents,
 } from "../features/students/studentsThunks";
-import { selectAllStudents, selectStudentsStatus, selectStudentsError } from "../features/students/selectors";
+import {
+  selectAllStudents,
+  selectStudentById,
+} from "../features/students/studentsSlice";
+import {
+  selectStudentsStatus,
+  selectStudentsError,
+} from "../features/students/selectors";
 import EditModal from "./EditModal";
 import ConfirmModal from "./ConfirmModal";
+
+/**
+ * Sub-component for individual rows to optimize re-renders.
+ * Uses selectStudentById for O(1) lookup from normalized state.
+ */
+function StudentRow({ id, index, onEdit, onDelete }) {
+  const student = useSelector((state) => selectStudentById(state, id));
+  
+  if (!student) return null;
+
+  return (
+    <tr className={student.gpa >= 3.5 ? "high-gpa" : ""}>
+      <td>{index + 1}</td>
+      <td>{student.name}</td>
+      <td>{student.studentId}</td>
+      <td>{student.major}</td>
+      <td className="gpa-cell">{student.gpa.toFixed(2)}</td>
+      <td>
+        <button className="btn-edit" onClick={() => onEdit(student)}>
+          Edit
+        </button>
+        <button className="btn-delete" onClick={() => onDelete(student.id)}>
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+}
 
 function StudentTable() {
   const dispatch = useDispatch();
@@ -16,8 +51,7 @@ function StudentTable() {
   const status = useSelector(selectStudentsStatus);
   const error = useSelector(selectStudentsError);
 
-  // Local UI state
-  const [editing, setEditing] = useState(null); // null = modal closed
+  const [editing, setEditing] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
 
   function handleDeleteConfirm() {
@@ -32,7 +66,7 @@ function StudentTable() {
         gpa: parseFloat(updatedData.gpa) || 0,
       })
     );
-    setEditing(null); // Close modal after update
+    setEditing(null);
   }
 
   if (status === "loading") {
@@ -74,17 +108,13 @@ function StudentTable() {
         </thead>
         <tbody>
           {students.map((student, index) => (
-            <tr key={student.id} className={student.gpa >= 3.5 ? "high-gpa" : ""}>
-              <td>{index + 1}</td>
-              <td>{student.name}</td>
-              <td>{student.studentId}</td>
-              <td>{student.major}</td>
-              <td className="gpa-cell">{student.gpa.toFixed(2)}</td>
-              <td>
-                <button className="btn-edit" onClick={() => setEditing(student)}>Edit</button>
-                <button className="btn-delete" onClick={() => setDeletingId(student.id)}>Delete</button>
-              </td>
-            </tr>
+            <StudentRow
+              key={student.id}
+              id={student.id}
+              index={index}
+              onEdit={setEditing}
+              onDelete={setDeletingId}
+            />
           ))}
         </tbody>
       </table>
