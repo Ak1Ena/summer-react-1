@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCourseAsync, fetchCourses } from '../features/courses/coursesThunks';
 import CourseTable from '../components/CourseTable';
@@ -13,6 +13,12 @@ function CoursesPage() {
   const dispatch = useDispatch();
   const [editingCourse, setEditingCourse] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchCourses());
+    }
+  }, [status, dispatch]);
 
   const handleDeleteConfirm = () => {
     dispatch(deleteCourseAsync(deletingId));

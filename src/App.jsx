@@ -1,18 +1,10 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import './App.css';
 import StudentsPage from './pages/StudentsPage';
 import CoursesPage from './pages/CoursesPage';
 import GradesPage from './pages/GradesPage';
-import { fetchCourses } from './features/courses/coursesThunks';
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCourses());
-  }, [dispatch]);
 
   return (
     <div className="app-container">
