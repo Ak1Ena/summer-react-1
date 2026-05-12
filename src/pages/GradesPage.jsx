@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteGrade } from '../features/grades/gradesSlice';
+import { selectAllStudents } from '../features/students/studentsSlice';
 import GradeTable from '../components/GradeTable';
 import GradeForm from '../components/GradeForm';
 import Modal from '../components/Modal';
@@ -8,7 +9,7 @@ import ConfirmModal from '../components/ConfirmModal';
 
 function GradesPage() {
   const grades = useSelector((state) => state.grades.list);
-  const students = useSelector((state) => state.students.list);
+  const students = useSelector(selectAllStudents);
   const courses = useSelector((state) => state.courses.list);
   const dispatch = useDispatch();
   const [editingGrade, setEditingGrade] = useState(null);

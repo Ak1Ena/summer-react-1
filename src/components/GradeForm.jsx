@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addGrade, updateGrade } from '../features/grades/gradesSlice';
+import { selectAllStudents } from '../features/students/studentsSlice';
 
 function GradeForm({ editingGrade, onCancel }) {
   const dispatch = useDispatch();
-  const students = useSelector((state) => state.students.list);
+  const students = useSelector(selectAllStudents);
   const courses = useSelector((state) => state.courses.list);
-
   const [formData, setFormData] = useState({
     studentId: '',
     courseId: '',
