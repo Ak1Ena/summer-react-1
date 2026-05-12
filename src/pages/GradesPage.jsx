@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteGrade } from '../features/grades/gradesSlice';
 import { useGetStudentsQuery } from '../features/students/studentsApi';
@@ -6,14 +6,21 @@ import GradeTable from '../components/GradeTable';
 import GradeForm from '../components/GradeForm';
 import Modal from '../components/Modal';
 import ConfirmModal from '../components/ConfirmModal';
+import { fetchCourses } from '../features/courses/coursesThunks';
 
 function GradesPage() {
   const grades = useSelector((state) => state.grades.list);
   const { data: students = [] } = useGetStudentsQuery();
-  const courses = useSelector((state) => state.courses.list);
+  const courses = useSelector((state) => state.courses);
   const dispatch = useDispatch();
   const [editingGrade, setEditingGrade] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+
+  useEffect(() => {
+    if (courses.status === 'idle') {
+      dispatch(fetchCourses());
+    }
+  }, [courses.status, dispatch]);
 
   const handleDeleteConfirm = () => {
     dispatch(deleteGrade(deletingId));
@@ -38,7 +45,7 @@ function GradesPage() {
       <GradeTable 
         grades={grades} 
         students={students}
-        courses={courses}
+        courses={courses.list}
         onEdit={handleEditGrade}
         onDelete={(id) => setDeletingId(id)}
       />
