@@ -1,28 +1,33 @@
-// src/features/students/selectors.js
-import { createSelector } from '@reduxjs/toolkit';
-import { selectAllStudents } from './studentsSlice';
+import { createSelector } from "@reduxjs/toolkit";
+import { studentsApi } from "./studentsApi";
 
-// ── Primitive selectors (return scalars — no memoization needed)
-export const selectStudentsStatus = (state) => state.students.status;
-export const selectStudentsError = (state) => state.students.error;
+const selectStudentsResult = studentsApi.endpoints.getStudents.select();
+const selectStudentsData = createSelector(selectStudentsResult, (result) => result.data ?? []);
 
-// ── Derived selectors (memoized — compute arrays or objects)
-export const selectAverageGpa = createSelector(
-  selectAllStudents,
-  (students) => {
-    if (!students.length) return '—';
-    const total = students.reduce((acc, s) => acc + s.gpa, 0);
-    return (total / students.length).toFixed(2);
-  }
-);
+export const selectAverageGpa = createSelector(selectStudentsData, (students) => {
+  if (students.length === 0) return "—";
+  return (students.reduce((acc, s) => acc + s.gpa, 0) / students.length).toFixed(2);
+});
+
+export const selectStudentCount = createSelector(selectStudentsData, (students) => students.length);
+
+export const selectMaxGPA = createSelector(selectStudentsData, (students) => {
+  if (students.length === 0) return "0.00";
+  return Math.max(...students.map((s) => s.gpa)).toFixed(2);
+});
+
+export const selectMinGPA = createSelector(selectStudentsData, (students) => {
+  if (students.length === 0) return "0.00";
+  return Math.min(...students.map((s) => s.gpa)).toFixed(2);
+});
 
 export const selectHighAchievers = createSelector(
-  selectAllStudents,
+  selectStudentsData,
   (students) => students.filter((s) => s.gpa >= 3.5)
 );
 
 export const selectGpaDistribution = createSelector(
-  selectAllStudents,
+  selectStudentsData,
   (students) => ({
     high: students.filter((s) => s.gpa >= 3.5).length,
     medium: students.filter((s) => s.gpa >= 2.5 && s.gpa < 3.5).length,

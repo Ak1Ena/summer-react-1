@@ -1,16 +1,13 @@
-// src/components/AddStudentForm.jsx - Session 4 (Async)
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addStudentAsync } from "../features/students/studentsThunks";
+import { useAddStudentMutation } from "../features/students/studentsApi";
 
 const EMPTY_FORM = { name: "", studentId: "", major: "", gpa: "" };
 
 function AddStudentForm() {
-  const dispatch = useDispatch();
+  const [addStudent, { isLoading }] = useAddStudentMutation();
   const [form, setForm] = useState(EMPTY_FORM);
   const [error, setError] = useState("");
 
-  // Single handler for ALL inputs via computed property name
   function handleChange(e) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -18,13 +15,11 @@ function AddStudentForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await dispatch(
-        addStudentAsync({ ...form, gpa: parseFloat(form.gpa) || 0 })
-      ).unwrap();
-      setForm(EMPTY_FORM); // Reset form after successful submit
+      await addStudent({ ...form, gpa: parseFloat(form.gpa) || 0 }).unwrap();
+      setForm(EMPTY_FORM);
       setError("");
     } catch (err) {
-      setError(err || "Failed to add student");
+      setError(err?.data?.message || "Failed to add student");
     }
   }
 
@@ -63,8 +58,8 @@ function AddStudentForm() {
           min="0"
           max="4"
         />
-        <button type="submit" className="btn-primary">
-          + Add Student
+        <button type="submit" className="btn-primary" disabled={isLoading}>
+          {isLoading ? "Adding..." : "+ Add Student"}
         </button>
       </div>
     </form>

@@ -1,75 +1,30 @@
-// src/components/StudentTable.jsx - Lab 5 version (Optimized)
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import {
-  deleteStudentAsync,
-  updateStudentAsync,
-  fetchStudents,
-} from "../features/students/studentsThunks";
-import {
-  selectAllStudents,
-  selectStudentById,
-} from "../features/students/studentsSlice";
-import {
-  selectStudentsStatus,
-  selectStudentsError,
-} from "../features/students/selectors";
+  useGetStudentsQuery,
+  useDeleteStudentMutation,
+  useUpdateStudentMutation,
+} from "../features/students/studentsApi";
 import EditModal from "./EditModal";
-import ConfirmModal from "./ConfirmModal";
-
-/**
- * Sub-component for individual rows to optimize re-renders.
- * Uses selectStudentById for O(1) lookup from normalized state.
- */
-function StudentRow({ id, index, onEdit, onDelete }) {
-  const student = useSelector((state) => selectStudentById(state, id));
-  
-  if (!student) return null;
-
-  return (
-    <tr className={student.gpa >= 3.5 ? "high-gpa" : ""}>
-      <td>{index + 1}</td>
-      <td>{student.name}</td>
-      <td>{student.studentId}</td>
-      <td>{student.major}</td>
-      <td className="gpa-cell">{student.gpa.toFixed(2)}</td>
-      <td>
-        <button className="btn-edit" onClick={() => onEdit(student)}>
-          Edit
-        </button>
-        <button className="btn-delete" onClick={() => onDelete(student.id)}>
-          Delete
-        </button>
-      </td>
-    </tr>
-  );
-}
+import StudentRow from "./StudentRow";
 
 function StudentTable() {
-  const dispatch = useDispatch();
-  const students = useSelector(selectAllStudents);
-  const status = useSelector(selectStudentsStatus);
-  const error = useSelector(selectStudentsError);
-
+  const { data: students = [], isLoading, isError, error, refetch } = useGetStudentsQuery();
+  const [deleteStudent] = useDeleteStudentMutation();
+  const [updateStudent] = useUpdateStudentMutation();
   const [editing, setEditing] = useState(null);
-  const [deletingId, setDeletingId] = useState(null);
 
-  function handleDeleteConfirm() {
-    dispatch(deleteStudentAsync(deletingId));
-    setDeletingId(null);
-  }
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this student?")) {
+      await deleteStudent(id);
+    }
+  };
 
-  function handleEditSave(updatedData) {
-    dispatch(
-      updateStudentAsync({
-        ...updatedData,
-        gpa: parseFloat(updatedData.gpa) || 0,
-      })
-    );
+  const handleEditSave = async (student) => {
+    await updateStudent({ ...student, gpa: parseFloat(student.gpa) || 0 });
     setEditing(null);
-  }
+  };
 
-  if (status === "loading") {
+  if (isLoading) {
     return (
       <div className="spinner-container">
         <div className="spinner"></div>
@@ -78,19 +33,17 @@ function StudentTable() {
     );
   }
 
-  if (status === "failed") {
+  if (isError) {
     return (
       <div className="error-banner">
-        <p>Error: {error}</p>
-        <button onClick={() => dispatch(fetchStudents())}>Retry</button>
+        <p>Error: {error?.status || "Failed to fetch students"}</p>
+        <button onClick={refetch}>Retry</button>
       </div>
     );
   }
 
-  if (status !== "succeeded") return null;
-
-  if (students.length === 0) {
-    return <p className="empty-state">No students yet. Add one above!</p>;
+  if (!students || students.length === 0) {
+    return <p className="empty-state">No students found. Add one to the list.</p>;
   }
 
   return (
@@ -110,10 +63,10 @@ function StudentTable() {
           {students.map((student, index) => (
             <StudentRow
               key={student.id}
-              id={student.id}
+              student={student}
               index={index}
-              onEdit={setEditing}
-              onDelete={setDeletingId}
+              setEditing={setEditing}
+              handleDelete={handleDelete}
             />
           ))}
         </tbody>
@@ -123,14 +76,6 @@ function StudentTable() {
           student={editing}
           onSave={handleEditSave}
           onCancel={() => setEditing(null)}
-        />
-      )}
-      {deletingId && (
-        <ConfirmModal
-          title="Delete Student"
-          message="Are you sure you want to delete this student? This action cannot be undone."
-          onConfirm={handleDeleteConfirm}
-          onCancel={() => setDeletingId(null)}
         />
       )}
     </>
