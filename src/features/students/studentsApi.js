@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE = 'https://68e9fdbaf1eeb3f856e5ae48.mockapi.io/';
+const BASE = import.meta.env.VITE_API_URL || 'https://68e9fdbaf1eeb3f856e5ae48.mockapi.io/';
 
 export const studentsApi = createApi({
   reducerPath: 'studentsApi',
