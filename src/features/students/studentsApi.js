@@ -27,15 +27,31 @@ export const studentsApi = createApi({
       invalidatesTags: [{ type: 'Student', id: 'LIST' }],
     }),
     updateStudent: builder.mutation({
-      query: (student) => ({
-        url: `students/${student.id}`,
+      query: ({ id, ...patch }) => ({
+        url: `students/${id}`,
         method: 'PUT',
-        body: student,
+        body: patch,
       }),
-      invalidatesTags: (result, error, student) => [
-        { type: 'Student', id: student.id },
-        { type: 'Student', id: 'LIST' },
-      ],
+      async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+        const patchList = dispatch(
+          studentsApi.util.updateQueryData('getStudents', undefined, (draft) => {
+            const item = draft.find((s) => s.id === id);
+            if (item) Object.assign(item, patch);
+          })
+        );
+        const patchDetail = dispatch(
+          studentsApi.util.updateQueryData('getStudentById', id, (draft) => {
+            Object.assign(draft, patch);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchList.undo();
+          patchDetail.undo();
+        }
+      },
+      invalidatesTags: (result, error, { id }) => [{ type: 'Student', id }],
     }),
     deleteStudent: builder.mutation({
       query: (id) => ({

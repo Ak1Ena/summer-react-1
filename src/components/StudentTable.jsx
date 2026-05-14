@@ -8,7 +8,19 @@ import EditModal from "./EditModal";
 import StudentRow from "./StudentRow";
 
 function StudentTable() {
-  const { data: students = [], isLoading, isError, error, refetch } = useGetStudentsQuery();
+  const {
+    data: students = [],
+    isLoading,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useGetStudentsQuery(undefined, {
+    pollingInterval: 30000,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMountOrArgChange: true,
+  });
   const [deleteStudent] = useDeleteStudentMutation();
   const [updateStudent] = useUpdateStudentMutation();
   const [editing, setEditing] = useState(null);
@@ -48,6 +60,10 @@ function StudentTable() {
 
   return (
     <>
+      <div style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+        {isFetching && <span className="badge">↻ Syncing...</span>}
+        <button onClick={refetch} className="btn-refresh">↻ Refresh</button>
+      </div>
       <table className="student-table">
         <thead>
           <tr>
