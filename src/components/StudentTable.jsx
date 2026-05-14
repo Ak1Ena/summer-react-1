@@ -60,9 +60,18 @@ function StudentTable() {
 
   return (
     <>
-      <div style={{ marginBottom: '10px', display: 'flex', gap: '10px', alignItems: 'center' }}>
-        {isFetching && <span className="badge">↻ Syncing...</span>}
-        <button onClick={refetch} className="btn-refresh">↻ Refresh</button>
+      <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Students List</h3>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          {isFetching && (
+            <span className="badge">
+              <span className="spinning">↻</span> Syncing
+            </span>
+          )}
+          <button onClick={refetch} className="btn-refresh">
+            <span className={isFetching ? "spinning" : ""}>↻</span> Refresh
+          </button>
+        </div>
       </div>
       <table className="student-table">
         <thead>

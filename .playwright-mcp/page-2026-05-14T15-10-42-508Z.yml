@@ -1,0 +1,31 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - heading "AcadeMate — RTK Query Migration" [level=1] [ref=e5]
+    - navigation [ref=e6]:
+      - link "Students" [ref=e7] [cursor=pointer]:
+        - /url: /
+      - link "Courses" [ref=e8] [cursor=pointer]:
+        - /url: /courses
+      - link "Grades" [ref=e9] [cursor=pointer]:
+        - /url: /grades
+  - main [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: Total Students
+          - generic [ref=e15]: "0"
+        - generic [ref=e16]:
+          - generic [ref=e17]: Average GPA
+          - generic [ref=e18]: —
+        - generic [ref=e19]:
+          - generic [ref=e20]: High Achievers (≥3.5)
+          - generic [ref=e21]: "0"
+      - generic [ref=e22]:
+        - heading "Add New Student" [level=3] [ref=e23]
+        - generic [ref=e24]:
+          - textbox "Full Name" [ref=e25]
+          - textbox "Student ID *" [ref=e26]
+          - textbox "Major" [ref=e27]
+          - spinbutton [ref=e28]
+          - button "+ Add Student" [ref=e29] [cursor=pointer]
+      - paragraph [ref=e32]: Loading students...
